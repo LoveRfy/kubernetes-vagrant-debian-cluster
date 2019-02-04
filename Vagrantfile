@@ -13,7 +13,7 @@ Vagrant.configure("2") do |config|
       node.vm.box = "ysicing/debian"
       node.vm.box_version = "9.7.0.1549265671"
       node.vm.hostname = "n#{i}.local.ysicing.net"
-      ip = "192.168.100.#{i+100}"
+      ip = "172.20.0.#{i+100}"
       node.vm.network "private_network", ip: ip
       node.vm.provider "virtualbox" do |vb|
         vb.gui = false
