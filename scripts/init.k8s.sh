@@ -70,7 +70,7 @@ EOF
 }
 
 config_kubelet(){
-    echo "KUBELET_EXTRA_ARGS=--fail-swap-on=false --cgroup-driver=cgroupfs" > /etc/default/kubelet
+    echo "KUBELET_EXTRA_ARGS=--fail-swap-on=false --cgroup-driver=cgroupfs --node-ip=${ip}" > /etc/default/kubelet
     systemctl daemon-reload
     systemctl restart kubelet
 }

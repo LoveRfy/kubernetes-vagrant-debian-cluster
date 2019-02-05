@@ -14,15 +14,18 @@ interact
 
 id
 
-cat >> /etc/ssh/sshd_config <<EOF
-UseDNS no
-PasswordAuthentication yes
-PermitRootLogin yes
-EOF
+#cat >> /etc/ssh/sshd_config <<EOF
+#UseDNS no
+#PasswordAuthentication yes
+#PermitRootLogin yes
+#EOF
+
+sed -i -e 's/^#\?PasswordAuthentication.*/PasswordAuthentication yes/g' /target/etc/ssh/sshd_config
+sed -i -e 's/^#\?PermitRootLogin.*/PermitRootLogin yes/g' /target/etc/ssh/sshd_config
 
 ssh-keygen -t rsa -f /root/.ssh/id_rsa -P ""
 
-sshkey=$(cat ~/.ssh/id_rsa.pub)
+sshkey="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDM4tQLufzkc5RDIRaa1N4zuXOuCSrEr4Z+cIu3U5/Z0dB1TYUBxrdAShNBoANnaL484gkXdjVDcebDGKZfOj5uvERH0FbCvrEzAYuJB+MSdLyGPDUxaae0glGWWY3tEtgT0Rr/BM/JVebUbjsZUnFGjpQS2UkSeOa9y1dtNvOAPSBZmy4N+lhBhyDSn3+gKLOXZ8btvDg2McdwIdjws6ecPkxMUxWshQlL1I/qecyJ35pr1h3f6nTVbRwApwenhEBdouW3GT0ImHPUQEd5yXg+HqwZqrWO2qwie953Rl7OofEDUR0ZcdY7vf6qxqy4w22TM2k03kj0gfQ00kC8kZuf ysicing@debian.local"
 echo "${sshkey}" > /root/.ssh/authorized_keys
 chmod 600 /root/.ssh/authorized_keys
 echo 'Welcome to Vagrant-built virtual machine. -.-' > /etc/motd
