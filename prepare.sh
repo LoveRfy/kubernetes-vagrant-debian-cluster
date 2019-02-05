@@ -22,9 +22,10 @@ EOF
 
 ssh-keygen -t rsa -f /root/.ssh/id_rsa -P ""
 
-echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDM4tQLufzkc5RDIRaa1N4zuXOuCSrEr4Z+cIu3U5/Z0dB1TYUBxrdAShNBoANnaL484gkXdjVDcebDGKZfOj5uvERH0FbCvrEzAYuJB+MSdLyGPDUxaae0glGWWY3tEtgT0Rr/BM/JVebUbjsZUnFGjpQS2UkSeOa9y1dtNvOAPSBZmy4N+lhBhyDSn3+gKLOXZ8btvDg2McdwIdjws6ecPkxMUxWshQlL1I/qecyJ35pr1h3f6nTVbRwApwenhEBdouW3GT0ImHPUQEd5yXg+HqwZqrWO2qwie953Rl7OofEDUR0ZcdY7vf6qxqy4w22TM2k03kj0gfQ00kC8kZuf ysicing@172.16.0.162" > /root/.ssh/authorized_keys
+sshkey=$(cat ~/.ssh/id_rsa.pub)
+echo "${sshkey}" > /root/.ssh/authorized_keys
 chmod 600 /root/.ssh/authorized_keys
-echo 'Welcome to Vagrant-built virtual machine. -.-' > /var/run/motd
+echo 'Welcome to Vagrant-built virtual machine. -.-' > /etc/motd
 
 systemctl restart sshd
 
@@ -57,3 +58,20 @@ cat > /etc/systemd/system/docker.service.d/http-proxy.conf <<EOF
 [Service]
 Environment="HTTP_PROXY=http://192.168.100.1:1087" "HTTPS_PROXY=http://192.168.100.1:1087"
 EOF
+
+[ -f "/vagrant/scripts/init.k8s.sh" ] || exit 1
+
+if [ "$1" == 1 ];then
+    echo "start init node"
+    [ -f "/vagrant/install.token" ] && rm -rf /vagrant/install.token
+    bash -x /vagrant/scripts/init.k8s.sh $2
+    token=$(cat /tmp/join)
+    cat > /vagrant/install.token <<EOF
+${token} --ignore-preflight-errors=Swap
+EOF
+
+else
+    echo "start join node"
+    bash -x /vagrant/scripts/init.k8s.sh $2 join
+    bash -x /vagrant/install.token
+fi
