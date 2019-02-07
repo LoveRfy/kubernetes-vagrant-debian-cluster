@@ -32,7 +32,7 @@ deb-src http://mirrors.aliyun.com/debian/ stretch-backports main contrib non-fre
 EOF
 
 apt-get update
-DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confnew" --force-yes -fuy dist-upgrade
+#DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confnew" --force-yes -fuy dist-upgrade
 apt-get install -y apt-transport-https ca-certificates procps curl net-tools iproute2 htop git zsh stretch-backports linux-image-amd64
 update-grub
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
