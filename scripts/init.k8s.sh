@@ -100,7 +100,7 @@ do_install(){
 }
 
 kubeadm_init(){
-    kubeadm init --pod-network-cidr=192.168.0.0/16  --service-cidr=10.96.0.0/12 --apiserver-advertise-address=${1} --ignore-preflight-errors=Swap | grep "discovery-token" | grep "join" > /tmp/join
+    kubeadm init --pod-network-cidr=192.168.0.0/16  --service-cidr=10.96.0.0/12 --apiserver-advertise-address=kubeapi.pt.ysicing.me --ignore-preflight-errors=Swap | grep "discovery-token" | grep "join" > /tmp/join
     mkdir -p $HOME/.kube
     cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
     chown $(id -u):$(id -g) $HOME/.kube/config

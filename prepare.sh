@@ -59,7 +59,7 @@ mkdir -p /etc/systemd/system/docker.service.d
 
 cat > /etc/systemd/system/docker.service.d/http-proxy.conf <<EOF
 [Service]
-Environment="HTTP_PROXY=http://192.168.100.1:1087" "HTTPS_PROXY=http://192.168.100.1:1087"
+Environment="HTTP_PROXY=http://172.20.0.1:1087" "HTTPS_PROXY=http://172.20.0.1:1087"
 EOF
 
 [ -f "/vagrant/scripts/init.k8s.sh" ] || exit 1
