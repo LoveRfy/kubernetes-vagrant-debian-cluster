@@ -14,8 +14,8 @@ interact
 
 id
 
-sed -i -e 's/^#\?PasswordAuthentication.*/PasswordAuthentication yes/g' /target/etc/ssh/sshd_config
-sed -i -e 's/^#\?PermitRootLogin.*/PermitRootLogin yes/g' /target/etc/ssh/sshd_config
+#sed -i -e 's/^#\?PasswordAuthentication.*/PasswordAuthentication yes/g' /target/etc/ssh/sshd_config
+#sed -i -e 's/^#\?PermitRootLogin.*/PermitRootLogin yes/g' /target/etc/ssh/sshd_config
 
 ssh-keygen -t rsa -f /root/.ssh/id_rsa -P ""
 
@@ -26,15 +26,15 @@ echo 'Welcome to Vagrant-built virtual machine. -.-' > /etc/motd
 
 systemctl restart sshd
 
-cat > /etc/apt/sources.list.d/backports.list <<EOF
-deb http://mirrors.aliyun.com/debian/ stretch-backports main contrib non-free
-deb-src http://mirrors.aliyun.com/debian/ stretch-backports main contrib non-free
-EOF
+#cat > /etc/apt/sources.list.d/backports.list <<EOF
+#deb http://mirrors.aliyun.com/debian/ stretch-backports main contrib non-free
+#deb-src http://mirrors.aliyun.com/debian/ stretch-backports main contrib non-free
+#EOF
 
-apt-get update
+#apt-get update
 #DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confnew" --force-yes -fuy dist-upgrade
-apt-get install -y apt-transport-https ca-certificates procps curl net-tools iproute2 htop git zsh stretch-backports linux-image-amd64
-update-grub
+#apt-get install -y apt-transport-https ca-certificates procps curl net-tools iproute2 htop git zsh stretch-backports linux-image-amd64
+#update-grub
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 who am i

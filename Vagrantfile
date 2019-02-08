@@ -11,7 +11,7 @@ Vagrant.configure("2") do |config|
   (1..$num_instances).each do |i|
     config.vm.define "node#{i}" do |node|
       node.vm.box = "ysicing/debian"
-      node.vm.box_version = "9.7.0.1549265671"
+      # node.vm.box_version = "9.7.0.1549265671"
       node.vm.hostname = "n#{i}.local.ysicing.net"
       ip = "172.20.0.#{i+100}"
       node.vm.network "private_network", ip: ip
