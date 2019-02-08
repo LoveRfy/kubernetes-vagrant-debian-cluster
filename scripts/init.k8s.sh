@@ -75,6 +75,16 @@ config_kubelet(){
     systemctl restart kubelet
 }
 
+check_local_image(){
+    [ -d "/vagrant" ] || mkdir /vagrant
+    [ -f "/vagrant/pkg.tgz" ] || curl -s -L http://148.70.49.123/docker/k8s/pkg.tgz -o /vagrant/pkg.tgz
+    [ -d "/tmp/k8simg" ] && rm -rf /tmp/k8simg/* || mkdir -p /tmp/k8simg
+    tar xf /vagrant/pkg.tgz -C /tmp/k8simg
+    pushd /tmp/k8simg
+    ls | grep tgz | xargs -I {} docker load -i ./{}
+    popd
+}
+
 do_install(){
     lsb_dist=$( get_distribution )
 	lsb_dist="$(echo "$lsb_dist" | tr '[:upper:]' '[:lower:]')"
@@ -96,6 +106,7 @@ do_install(){
     esac
     config_docker
     config_kubelet
+    check_local_image
     kubeadm config images pull
 }
 

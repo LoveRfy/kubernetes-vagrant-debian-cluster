@@ -54,6 +54,8 @@ ZSH_THEME_GIT_PROMPT_DIRTY="%{\$fg[blue]%}) %{\$fg[yellow]%}✗"
 ZSH_THEME_GIT_PROMPT_CLEAN="%{\$fg[blue]%})"
 EOF
 
+sed -i -e 's/plugins=\(git\)/plugins=\(git history-substring-search history zsh-syntax-highlighting zsh-autosuggestions\)/g' /root/.zshrc
+
 mkdir -p /etc/systemd/system/docker.service.d
 
 cat > /etc/systemd/system/docker.service.d/http-proxy.conf <<EOF
