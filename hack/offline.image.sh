@@ -4,8 +4,7 @@ docker images | grep "ago" | awk '{print $1":"$2}' > /tmp/offimage.txt
 
 cat /tmp/offimage.txt | while read line
 do
-	pkg=$(echo ${line##*/} | awk -F: '{print $1}')
-	echo "saving $pkg..."
+	pkg=$(echo ${line##*/} | tr ':' '.')
 	docker save $line > ./$pkg.tgz
 done
 
