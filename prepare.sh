@@ -2,7 +2,7 @@
 
 echo root:vagrant|chpasswd
 
-apt-get install expect -y
+apt-get install expect zsh git -y
 
 expect -c "
 set timeout 20
