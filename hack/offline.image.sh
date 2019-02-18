@@ -8,4 +8,4 @@ do
 	docker save $line > ./$pkg.tgz
 done
 
-tar zcf /vagrant/pkg.tgz `find . -maxdepth 1 -iname "*.tgz" | sed 1d`
+tar zcf /vagrant/pkg.tgz `find . -maxdepth 1 -iname "*.tgz"`
