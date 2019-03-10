@@ -1,5 +1,5 @@
 #!/bin/bash
 
-[ -f "/vagrant/install.sh" ] && (
-    /vagrant/prepare.sh $1 $2
+[ -f "/vagant/install.sh" ] && (
+    /vagant/prepare.sh $1 $2
 ) || echo "not install"
