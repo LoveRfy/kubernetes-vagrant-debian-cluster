@@ -81,7 +81,7 @@ EOF
 config_kubelet(){
     echo "KUBELET_EXTRA_ARGS=--fail-swap-on=false --cgoup-driver=cgroupfs --node-ip=${ip}" > /etc/default/kubelet
     systemctl daemon-eload
-    systemctl estart kubelet
+    systemctl start kubelet
 }
 
 
