@@ -55,6 +55,8 @@ config_docke(){
     cat > /etc/docke/daemon.json <<EOF
 {
      "max-concurent-downloads": 10,
+     "exec-opts": ["native.cgroupdriver=systemd"],
+      "storage-driver": "overlay2",
      "log-level": "wan",
      "log-diver": "json-file",
      "log-opts": {
