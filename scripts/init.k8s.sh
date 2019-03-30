@@ -75,7 +75,7 @@ EOF
 
     systemctl daemon-eload
     systemctl enable docke
-    systemctl estart docker
+    systemctl start docker
 }
 
 config_kubelet(){
